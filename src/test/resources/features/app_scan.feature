@@ -42,17 +42,6 @@ Feature: Automated Application Security Scanning
     And the XML report is written to the file build/zap/ssi.xml
     Then no Medium or higher risk vulnerabilities should be present
 
-  @iriusrisk-cwe-98
-  Scenario: The application should not contain remote file inclusion vulnerabilities
-    And the Remote-file-inclusion policy is enabled
-    And the attack strength is set to High
-    And the alert threshold is set to Low
-    When the scanner is run
-    And the following false positives are removed
-      |url                    |parameter          |cweId      |wascId   |
-    And the XML report is written to the file build/zap/sfi.xml
-    Then no Medium or higher risk vulnerabilities should be present
-
   @iriusrisk-cwe-97
   Scenario: The application should not contain Server side include vulnerabilities
     And the Server-side-include policy is enabled
@@ -119,28 +108,6 @@ Feature: Automated Application Security Scanning
     And the XML report is written to the file build/zap/source_disclosure.xml
     Then no Medium or higher risk vulnerabilities should be present
 
-  @iriusrisk-cwe-78
-  Scenario: The application should not be vulnerable to Shell Shock
-    And the shell-shock policy is enabled
-    And the attack strength is set to High
-    And the alert threshold is set to Low
-    When the scanner is run
-    And the following false positives are removed
-      |url                    |parameter          |cweId      |wascId   |
-    And the XML report is written to the file build/zap/shell_shock.xml
-    Then no Medium or higher risk vulnerabilities should be present
-
-  @iriusrisk-cwe-90
-  Scenario: The application should not be vulnerable to LDAP injection
-    And the ldap-injection policy is enabled
-    And the attack strength is set to High
-    And the alert threshold is set to Low
-    When the scanner is run
-    And the following false positives are removed
-      |url                    |parameter          |cweId      |wascId   |
-    And the XML report is written to the file build/zap/ldap_injection.xml
-    Then no Medium or higher risk vulnerabilities should be present
-
   @iriusrisk-cwe-91
   Scenario: The application should not be vulnerable to XPATH injection
     And the xpath-injection policy is enabled
@@ -161,17 +128,6 @@ Feature: Automated Application Security Scanning
     And the following false positives are removed
       |url                    |parameter          |cweId      |wascId   |
     And the XML report is written to the file build/zap/xxe.xml
-    Then no Medium or higher risk vulnerabilities should be present
-
-  @iriusrisk-cwe-209-poodle
-  Scenario: The application should not be vulnerable to the Generic Padding Oracle attack
-    And the padding-oracle policy is enabled
-    And the attack strength is set to High
-    And the alert threshold is set to Low
-    When the scanner is run
-    And the following false positives are removed
-      |url                    |parameter          |cweId      |wascId   |
-    And the XML report is written to the file build/zap/padding_oracle.xml
     Then no Medium or higher risk vulnerabilities should be present
 
   @iriusrisk-cwe-200
