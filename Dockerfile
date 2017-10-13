@@ -1,9 +1,11 @@
 # Use OpenJDK 8
 FROM openjdk:8-jdk
 
-ENV URL "https:\/\/localhost:8080\/"
-ENV TAGS "@cwe-319-auth"
+ENV URL "http://servletsearch.com/Servlet-Search/"
+ENV TAGS "@app_scan"
 ENV TAGS_SKIP "~@skip"
+ENV PROXY_HOST "127.0.0.1"
+ENV PROXY_PORT "8090"
 
 # Set a sensible server directory.
 WORKDIR /home/bdd-security
@@ -14,5 +16,6 @@ ADD . .
 # run gradle
 RUN ./gradlew buildIt
 
-# Execute gradle tests
-CMD sed -E -i "s/<baseUrl>.+<\/baseUrl>/<baseUrl>$URL<\/baseUrl>/" config.xml && ./gradlew -Dcucumber.options="--tags ${TAGS} --tags ${TAGS_SKIP}"
+# Execute gradle testsi
+CMD sed -E -i "s,<baseUrl>.+</baseUrl>,<baseUrl>$URL</baseUrl>," config.xml && sed -E -i "s,<host>.+</host>,<host>$PROXY_HOST</host>," config.xml && sed -E -i "s,<port>.+</port>,<port>$PROXY_PORT</port>," config.xml  &&./gradlew -Dcucumber.options="--tags ${TAGS}"
+
