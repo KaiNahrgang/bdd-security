@@ -1,0 +1,21 @@
+version: "3"
+services:
+  zap:
+   build: ./zap
+   image: "sectestlab:5000/zap-proxy"
+   environment:
+           - HOST=0.0.0.0
+           - PORT=8090
+           - CONFIG=-config api.key=12345 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
+   ports:
+    - "8090:8090"
+  bdd:
+   build: ./bdd
+   image: "sectestlab:5000/bdd-security-simplesearch"
+   environment:
+           - URL=http://servletsearch.com/Servlet-Search/
+           - TAGS=@app_scan
+           - TAGS_SKIP=~@skip
+           - PROXY_HOST=zap
+           - PROXY_PORT=8090
+           - API_KEY=12345
