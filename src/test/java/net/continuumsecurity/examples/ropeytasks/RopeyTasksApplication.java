@@ -20,18 +20,16 @@ public class RopeyTasksApplication extends WebApplication implements ILogin,
 
     @Override
     public void openLoginPage() {
-        driver.get(Config.getInstance().getBaseUrl() + "user/login");
-        findAndWaitForElement(By.id("username"));
+        driver.get(Config.getInstance().getBaseUrl());
+        findAndWaitForElement(By.name("lastname"));
     }
 
     @Override
     public void login(Credentials credentials) {
         UserPassCredentials creds = new UserPassCredentials(credentials);
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys(creds.getUsername());
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys(creds.getPassword());
-        driver.findElement(By.name("_action_login")).click();
+        driver.findElement(By.name("lastname")).clear();
+        driver.findElement(By.name("lastname")).sendKeys(creds.getUsername());
+        driver.findElement(By.name("action")).click();
     }
 
     // Convenience method
@@ -49,29 +47,17 @@ public class RopeyTasksApplication extends WebApplication implements ILogin,
         }
     }
 
-    public void viewProfile() {
-        driver.findElement(By.linkText("Profile")).click();
-    }
-
-    public void viewAlicesProfile() {
-        viewProfile();
-    }
-
-    public void viewBobsProfile() {
-        viewProfile();
-    }
-
     @Override
     public void logout() {
-        driver.findElement(By.linkText("Logout")).click();
+        return; //driver.findElement(By.linkText("Logout")).click();
     }
 
     public void search(String query) {
-        findAndWaitForElement(By.linkText("Tasks")).click();
-        driver.findElement(By.id("q")).clear();
-        driver.findElement(By.id("q")).sendKeys(query);
-        WebElement searchBtn = driver.findElement(By.name("search-button"));
-        searchBtn.click();
+        if (query != null) {
+            driver.findElement(By.name("lastname")).clear();
+            driver.findElement(By.name("lastname")).sendKeys(query);
+            driver.findElement(By.name("action")).click();
+        }
     }
 
     public void viewAllUsers() {
@@ -80,9 +66,7 @@ public class RopeyTasksApplication extends WebApplication implements ILogin,
 
     public void navigate() {
         openLoginPage();
-        login(Config.getInstance().getDefaultCredentials());
-        viewProfile();
-        search("test");
+        search(Config.getInstance().getDefaultUser().toString());
     }
 
 }

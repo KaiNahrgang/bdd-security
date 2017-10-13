@@ -10,7 +10,7 @@
     <defaultDriver path="src/test/resources/drivers/chromedriver-mac">Chrome</defaultDriver> -->
 
     <!-- Base URL of the application to test -->
-    <baseUrl>http://localhost:8080/</baseUrl>
+    <baseUrl>http://servletsearch.com/Servlet-Search/</baseUrl>
 
     <!-- A Java class to hold the Selenium steps to test the application in depth. Optionally required for in-depth authn/z and session management testing. -->
     <class>net.continuumsecurity.examples.ropeytasks.RopeyTasksApplication</class>
@@ -50,12 +50,12 @@
         <password>admin</password>
     </nessus>
 
-    <!-- Optional location of a running OWASP ZAP instance.  Either an external- already running ZAP instance must be specified here, or the zapPath must be specified to launch ZAP
+    <!-- Optional location of a running OWASP ZAP instance.  Either an external- already running ZAP instance must be specified here, or the zapPath must be specified to launch ZAP-->
     <proxy>
         <host>127.0.0.1</host>
-        <port>8888</port>
-        <api></api>
-    </proxy>-->
+        <port>8080</port>
+        <api>1v8nhffe62slmahs2hsofvhbsi</api>
+    </proxy>
 
     <zapPath>zap/zap.sh</zapPath>
 

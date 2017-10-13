@@ -49,7 +49,7 @@ public class AppScanningSteps {
     Application app;
     List<Alert> alerts = new ArrayList<Alert>();
     String scannerIds = null;
-    private final static String ZAP_CONTEXT_NAME= "Default Context";
+    private final static String ZAP_CONTEXT_NAME= "ServletSearch Context";
 
     public AppScanningSteps() {
         app = Config.getInstance().createApp();
