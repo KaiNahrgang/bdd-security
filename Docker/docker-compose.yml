@@ -3,6 +3,7 @@ services:
   zap:
    build: ./zap
    image: "sectestlab:5000/zap-proxy"
+   network_mode: "host"
    environment:
            - HOST=0.0.0.0
            - PORT=8090
@@ -12,6 +13,7 @@ services:
   bdd:
    build: ./bdd
    image: "sectestlab:5000/bdd-security-simplesearch"
+   network_mode: "host"
    environment:
            - URL=http://servletsearch.com/Servlet-Search/
            - TAGS=@app_scan
