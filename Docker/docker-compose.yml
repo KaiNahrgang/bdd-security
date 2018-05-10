@@ -11,7 +11,7 @@ services:
    ports:
     - "8090:8090"
   bdd:
-   build: ./bdd
+   build: ../bdd
    image: "sectestlab:5000/bdd-security-simplesearch"
    network_mode: "host"
    environment:

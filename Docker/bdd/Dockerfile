@@ -12,10 +12,10 @@ ENV API_KEY "12345"
 WORKDIR /home/bdd-security
 
 # Add the directory
-ADD . .
+ADD ../../ .
 
 # run gradle
-RUN .././gradlew buildIt
+RUN ./gradlew buildIt
 
 # Execute gradle testsi
 CMD sed -E -i "s,<baseUrl>.+</baseUrl>,<baseUrl>$URL</baseUrl>," config.xml && sed -E -i "s,<host>.+</host>,<host>$PROXY_HOST</host>," config.xml && sed -E -i "s,<port>.+</port>,<port>$PROXY_PORT</port>," config.xml && sed -E -i "s,<api>.+</api>,<api>$API_KEY</api>," config.xml  && ./gradlew -Dcucumber.options="--tags ${TAGS}"
